@@ -70,12 +70,41 @@ const printStacks = () => {
 
 // Next, what do you think this function should do?
 const movePiece = () => {
-  // const moveDisc(n, start, destination){
-//   let mover = start.pop();
-//   destination.push(mover);
-// }
+  const moveDisc= (n, start, destination) => {
+  let mover = start.pop();
+  destination.push(mover);
+}
 
 }
+
+moveTower = (n, start, destination) => {
+  const temp;
+  if(start === a && destination === b || start === b && destination === a){
+    temp = c;
+    console.log('moving' + n + ' from a to b')
+
+  } else if (start === b && destination === c || start === c && destination === b){
+    temp = a;
+    console.log('moving ' + n + ' from b to c')
+
+  } else if (start === a && destination === c || start === c && destination === a){
+    temp = b;
+    console.log('moving ' + n + ' from a to c')
+  }
+}
+
+if (n === 1){
+  moveDisc(1, start, destination);
+  return;
+}
+
+moveTower(n-1, start, temp);
+moveDisc(n, start, destination);
+moveTower(n-1, temp, destination);
+
+console.log('start:', a, b, c);
+moveTower(5, a, c);
+console.log('end:', a,b,c);
 
 // Before you move, should you check if the move it actually allowed? Should 3 be able to be stacked on 2
 const isLegal = () => {
