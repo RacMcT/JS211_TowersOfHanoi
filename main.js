@@ -69,12 +69,9 @@ const printStacks = () => {
 }
 
 // Next, what do you think this function should do?
-const movePiece = () => {
-  const moveDisc= (n, start, destination) => {
+  const movePiece= (n, start, destination) => {
   let mover = start.pop();
   destination.push(mover);
-}
-
 }
 
 moveTower = (n, start, destination) => {
@@ -94,12 +91,12 @@ moveTower = (n, start, destination) => {
 }
 
 if (n === 1){
-  moveDisc(1, start, destination);
+  movePiece(1, start, destination);
   return;
 }
 
 moveTower(n-1, start, temp);
-moveDisc(n, start, destination);
+movePiece(n, start, destination);
 moveTower(n-1, temp, destination);
 
 console.log('start:', a, b, c);
