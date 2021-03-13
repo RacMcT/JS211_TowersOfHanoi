@@ -60,7 +60,7 @@ let stacks = {
 //count moves user makes
 let moveCounter = 0;
 
-//prints string and counter update in console?
+//prints string and counter update in console?-- don't forget to add to getPrompt function!!!!
 
 const printCounter = () =>{
   console.log("Number of moves: " + moveCounter++);
@@ -82,18 +82,17 @@ const printStacks = () => {
 
 // Before you move, should you check if the move it actually allowed? Should 3 be able to be stacked on 2
 const isLegal = (start, destination) => {
-  // Your code here
-  if(stacks[start][stacks[start].length-1] < stacks[destination][stacks[destination].length-1]){
+  if([stacks[start].length-1] > 0 &&  [stacks[destination].length] == 0) {
     return true;
   }
-  if(stacks[start][stacks[start].length - 1] > stacks[destination][stacks[destination].length - 1]) {
-    return false;
-}
+  else if ([stacks[start]] < [stacks[destination]]){
+    return true;
+  } 
+  else {return false}
 }
 
-// What is a win in Towers of Hanoi? When should this function run?
+// What is a win in Towers of Hanoi? When should this function run? It should run at the end of each turn?
 const checkForWin = () => {
-  // Your code here
   if(stacks["b"].length == 4 || stacks["c"].length == 4){
     return true
   }
@@ -130,7 +129,7 @@ const getPrompt = () => {
   });
 }
 
-// Tests
+ //Test
 
 if (typeof describe === 'function') {
 
