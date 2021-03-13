@@ -25,9 +25,6 @@
 //n-1 disks
 
 
-
-
-
 //UNIT TESTS:
 // Only stacks onto empty rod or larger disk
 // Only moves disk at top of pile
@@ -60,6 +57,15 @@ let stacks = {
   c: []
 };
 
+//count moves user makes
+let moveCounter = 0;
+
+//prints string and counter update in console?
+
+const printCounter = () =>{
+  console.log("Number of moves: " + moveCounter++);
+}
+
 // Start here. What is this function doing?
 // This function is updating where the discs are located and putting it into the console each time
 const printStacks = () => {
@@ -69,62 +75,56 @@ const printStacks = () => {
 }
 
 // Next, what do you think this function should do?
-  const movePiece= (n, start, destination) => {
-  let mover = start.pop();
-  destination.push(mover);
+// This function should move discs from one stack to another stack -- onclick or drag for GUI?
+  const movePiece = (start, destination) => {
+  return stacks[destination].push(stacks[start].pop())
 }
-
-moveTower = (n, start, destination) => {
-  const temp;
-  if(start === a && destination === b || start === b && destination === a){
-    temp = c;
-    console.log('moving' + n + ' from a to b')
-
-  } else if (start === b && destination === c || start === c && destination === b){
-    temp = a;
-    console.log('moving ' + n + ' from b to c')
-
-  } else if (start === a && destination === c || start === c && destination === a){
-    temp = b;
-    console.log('moving ' + n + ' from a to c')
-  }
-}
-
-if (n === 1){
-  movePiece(1, start, destination);
-  return;
-}
-
-moveTower(n-1, start, temp);
-movePiece(n, start, destination);
-moveTower(n-1, temp, destination);
-
-console.log('start:', a, b, c);
-moveTower(5, a, c);
-console.log('end:', a,b,c);
 
 // Before you move, should you check if the move it actually allowed? Should 3 be able to be stacked on 2
-const isLegal = () => {
+const isLegal = (start, destination) => {
   // Your code here
-
+  if(stacks[start][stacks[start].length-1] < stacks[destination][stacks[destination].length-1]){
+    return true;
+  }
+  if(stacks[start][stacks[start].length - 1] > stacks[destination][stacks[destination].length - 1]) {
+    return false;
+}
 }
 
 // What is a win in Towers of Hanoi? When should this function run?
 const checkForWin = () => {
   // Your code here
+  if(stacks["b"].length == 4 || stacks["c"].length == 4){
+    return true
+  }
+  else{
+    return false
+  }
 
 }
 
 // When is this function called? What should it do with its argument?
-const towersOfHanoi = (startStack, endStack) => {
-  // Your code here
+
+//Takes in user input and then runs other functions in order. 
+//If move is legal, then it will move the piece. Once it is moved it will check for a win. 
+//If the move is not legal it will tell you the move is invalid????? 
+
+const towersOfHanoi = (start, destination) => {
+  if(isLegal(start, destination)) {
+    movePiece(start, destination);
+    if(checkForWin()==true) {
+      console.log("Congratulations, you won!");
+    }
+  } else console.log("Illegal move, please try again");
 }
+
 
 const getPrompt = () => {
   printStacks();
-  rl.question('start stack: ', (startStack) => {
-    rl.question('end stack: ', (endStack) => {
-      towersOfHanoi(startStack, endStack);
+  printCounter();
+  rl.question('start stack: ', (start) => {
+    rl.question('destination stack: ', (destination) => {
+      towersOfHanoi(start, destination);
       getPrompt();
     });
   });
@@ -171,5 +171,39 @@ if (typeof describe === 'function') {
 } else {
 
   getPrompt();
-
 }
+
+//ORIGINAL CODE ATTEMPTS:
+
+// // This code I wrote for playing the game in the console... 
+// moveTower = (n, start, destination) => {
+//   const temp;
+//   if(start === a && destination === b || start === b && destination === a){
+//     temp = c;
+//     console.log('moving' + n + ' from a to b')
+
+//   } else if (start === b && destination === c || start === c && destination === b){
+//     temp = a;
+//     console.log('moving ' + n + ' from b to c')
+
+//   } else if (start === a && destination === c || start === c && destination === a){
+//     temp = b;
+//     console.log('moving ' + n + ' from a to c')
+//   }
+// }
+
+// This function I wrote to make the peices move and to call the movepeice function above
+// if (n === 1){
+//   movePiece(1, start, destination);
+//   return;
+// }
+
+//This code I wrote to pass through the infor for the rules in if/else statements above- should work together?
+
+// moveTower(n-1, start, temp);
+// movePiece(n, start, destination);
+// moveTower(n-1, temp, destination);
+
+// console.log('start:', a, b, c);
+// moveTower(5, a, c);
+// console.log('end:', a,b,c);
