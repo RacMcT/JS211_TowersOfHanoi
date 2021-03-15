@@ -1,37 +1,3 @@
-//HOW DO YOU WIN?
-//The goal of the game is to move all of the disks from the left rod to the far right rod
-//End has same pyramid order on the far right as started on the left
-
-// Rules:
-// Can only move a disk that is at the top of the pile
-// Can only move a disk onto an empty rod or a larger disk
-// Can only move one disk at a time
-// Is allowed to move disk back and forth between rods
-// Can take as many turns as needed to solve the puzzle
-
-//Logical Progression of the game:
-// Start with disk 1 on post A
-// Move 1 from post A to post C
-// so this means we move from it's starting point to where we want it to end on for this round
-
-//Pseudo Code:
-// if (disk ===1){ //"disk 1 is the disk number, 1 is smallest disk
-// document.write("Move disk " + disk + " from post " + start + " to post " + 
-//       destination + ".<br/>";
-//"start" represents starting post, which changes depending on which disk you are moving
-// "destination" represents the destination post, which also changes depending on which disk you are moving 
-//   }
-
-//n-1 disks
-
-
-//UNIT TESTS:
-// Only stacks onto empty rod or larger disk
-// Only moves disk at top of pile
-// User can move disks between rods
-// Keeps track of movements it takes user to solve problem
-// Calls winner of the game
-
 
 'use strict';
 
@@ -99,7 +65,6 @@ const checkForWin = () => {
   else{
     return false
   }
-
 }
 
 // When is this function called? What should it do with its argument?
@@ -116,7 +81,6 @@ const towersOfHanoi = (start, destination) => {
     }
   } else console.log("Illegal move, please try again");
 }
-
 
 const getPrompt = () => {
   printStacks();
@@ -206,3 +170,37 @@ if (typeof describe === 'function') {
 // console.log('start:', a, b, c);
 // moveTower(5, a, c);
 // console.log('end:', a,b,c);
+
+//HOW DO YOU WIN?
+//The goal of the game is to move all of the disks from the left rod to the far right rod
+//End has same pyramid order on the far right as started on the left
+
+// Rules:
+// Can only move a disk that is at the top of the pile
+// Can only move a disk onto an empty rod or a larger disk
+// Can only move one disk at a time
+// Is allowed to move disk back and forth between rods
+// Can take as many turns as needed to solve the puzzle
+
+//Logical Progression of the game:
+// Start with disk 1 on post A
+// Move 1 from post A to post C
+// so this means we move from it's starting point to where we want it to end on for this round
+
+//Pseudo Code:
+// if (disk ===1){ //"disk 1 is the disk number, 1 is smallest disk
+// document.write("Move disk " + disk + " from post " + start + " to post " + 
+//       destination + ".<br/>";
+//"start" represents starting post, which changes depending on which disk you are moving
+// "destination" represents the destination post, which also changes depending on which disk you are moving 
+//   }
+
+//n-1 disks
+
+
+//UNIT TESTS:
+// Only stacks onto empty rod or larger disk
+// Only moves disk at top of pile
+// User can move disks between rods
+// Keeps track of movements it takes user to solve problem
+// Calls winner of the game
