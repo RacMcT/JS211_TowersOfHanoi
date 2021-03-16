@@ -3,21 +3,28 @@
   <head>
     <meta charset="utf-8">
     <title></title>
-    <script src="index.js"></script>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="GUI.js" defer></script>
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
     <h1>Towers Of Hanoi</h1>
-    <hr/>
-      <div id="top-row" data-row="top" class="red row" onclick="selectRow(this)"></div>
-      <div id="middle-row" data-row="middle" class="yellow row" onclick="selectRow(this)"></div>
-      <div id="bottom-row" class="green row" data-row="bottom" onclick="selectRow(this)">
-        <div id="4" data-size="4" data-color="yellow" class="stone" ></div>
-        <div id="3" data-size="3" data-color="red" class="stone" ></div>
-        <div id="2" data-size="2" data-color="green" class="stone" ></div>
-        <div id="1" data-size="1" data-color="blue" class="stone" ></div>
-      </div>
-    <hr/>
+    
+    <div class="container">
+      <div class="bar" id="bar0"></div>
+      <div class="bar" id="bar1"></div>
+      <div class="bar" id="bar2"></div>
+      
+      <div class="disc" id="disc0"></div> 
+      <div class="disc" id="disc1"></div> 
+      <div class="disc" id="disc2"></div> 
+      <div class="disc" id="disc3"></div> 
+      <div class="disc" id="disc4"></div> 
+    
+      <button onclick="executeHanoi()" >Play Game</button>
+    
+    </div> 
+    
+
   </body>
 </html>
 
