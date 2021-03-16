@@ -71,9 +71,12 @@ const checkForWin = () => {
 
 //Takes in user input and then runs other functions in order. 
 //If move is legal, then it will move the piece. Once it is moved it will check for a win. 
-//If the move is not legal it will tell you the move is invalid????? 
+//If the move is not legal it will tell you the move is invalid
+//Added trim() and toLowerCase() to help with user input errors 
 
 const towersOfHanoi = (start, destination) => {
+  start= start.trim().toLowerCase();
+  destination = destination.trim().toLowerCase();
   if(isLegal(start, destination)) {
     movePiece(start, destination);
     if(checkForWin()==true) {
