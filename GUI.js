@@ -1,35 +1,35 @@
 // GUI Attempt for JS:
 
-// const disc, bar, dragDone;
+ const disc, bar, dragdone;
 
 function towersOfHanoi(){
   disc = document.getElementsByClassName("disc");
   bar = document.getElementsByClassName("bar");
   for (i = 0;i<disc.length;i++){
     disc[i].draggable = i==0;
-    disc[i].addEventListener("dragStart",dragStart);
+    disc[i].addEventListener("dragstart",dragstart);
   }
   for (var i = 0;i<bars.length;i++){
-    bar[i].addEventListener("dragOver", dragOver);
+    bar[i].addEventListener("dragover", dragover);
     bar[i].addEventListener("drop", drop);
-    bar[i].addEventListener("dragEnter", dragEnter);
+    bar[i].addEventListener("dragenter", dragenter);
   }
 }
 
-function dragStart(ev) {
+function dragstart(ev) {
   // write Diks-ID into dataTransfer Object
   ev.dataTransfer.setData('text', ev.target.id);
   // since dataTransfer is protected in dragEnter need to have a variable-- "ev like event"
   dragDone = ev.target.id;
 }
 
-function dragEnter (ev) {
+function dragenter (ev) {
   // get bar/tower that has been entered by drag and get disk-ID
   let bar = ev.currentTarget; 
-  let disc = dragDone;
+  let disc = dragdone;
   // get disks that are already on tower
-  let discsOnTower = tower.getElementsByClassName("disc"); 
-  if (discsOnTower.length==0 || discsOnTower[0].id>disc){
+  let discOnBar = bar.getElementsByClassName("disc"); 
+  if (discOnBar.length==0 || discOnBar[0].id>disc){
     // here if no discs yet on bar/tower or the top disc is bigger than the dragged disc 
     tower.discCanBeDroppedHere = true; // need to remember for dragOver?
     ev.preventDefault(); // yes please!
@@ -38,7 +38,7 @@ function dragEnter (ev) {
   bar.discCanBeDroppedHere = false; // sorry no drop allowed here
 }
 
-function dragOver(ev){
+function dragover(ev){
   if (ev.currentTarget.discCanBeDroppedHere)
       ev.preventDefault();// if we may drop here ...
 }
