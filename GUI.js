@@ -1,37 +1,37 @@
 // GUI Attempt for JS:
 
-const discs, bars, dragdone;
+// const disc, bar, dragDone;
 
-function init(){
-  discs = document.getElementsByClassName("disc");
-  bars = document.getElementsByClassName("bar");
-  for (var i = 0;i<discs.length;i++){
-    discs[i].draggable = i==0;
-    discs[i].addEventListener("dragstart",dragStart);
+function towersOfHanoi(){
+  disc = document.getElementsByClassName("disc");
+  bar = document.getElementsByClassName("bar");
+  for (i = 0;i<disc.length;i++){
+    disc[i].draggable = i==0;
+    disc[i].addEventListener("dragStart",dragStart);
   }
   for (var i = 0;i<bars.length;i++){
-    bars[i].addEventListener("dragover", dragOver);
-    bars[i].addEventListener("drop", drop);
-    bars[i].addEventListener("dragenter", dragEnter);
+    bar[i].addEventListener("dragOver", dragOver);
+    bar[i].addEventListener("drop", drop);
+    bar[i].addEventListener("dragEnter", dragEnter);
   }
 }
 
 function dragStart(ev) {
   // write Diks-ID into dataTransfer Object
   ev.dataTransfer.setData('text', ev.target.id);
-  // since dataTransfer is protected in dragenter we have to have a variable
+  // since dataTransfer is protected in dragEnter need to have a variable-- "ev like event"
   dragDone = ev.target.id;
 }
 
 function dragEnter (ev) {
-  // get tower that has been entered by drag and get disk-ID
+  // get bar/tower that has been entered by drag and get disk-ID
   let bar = ev.currentTarget; 
   let disc = dragDone;
   // get disks that are already on tower
-  let discsOnTower = tower.getElementsByClassName("disk"); 
+  let discsOnTower = tower.getElementsByClassName("disc"); 
   if (discsOnTower.length==0 || discsOnTower[0].id>disc){
-    // here if no disks yet on tower or the top disk is bigger than the dragged disk  
-    tower.discCanBeDroppedHere = true; // we have to remember it for dragover
+    // here if no discs yet on bar/tower or the top disc is bigger than the dragged disc 
+    tower.discCanBeDroppedHere = true; // need to remember for dragOver?
     ev.preventDefault(); // yes please!
     return;
   }
@@ -51,16 +51,16 @@ function drop(ev) {
   // put disc on top of bar
   bar.insertBefore(disc,bar.firstChild);
   // re-adjust draggability
-  for (i=0; i<bars.length;i++){ // for all towers
-    e = bars[i].getElementsByClassName("disc"); // get discs
-    if (e.length) e[0].draggable = true; // iop disk is draggable
+  for (i=0; i<bar.length;i++){ // for all towers
+    e = bar[i].getElementsByClassName("disc"); // get discs
+    if (e.length) e[0].draggable = true; // top disk is draggable
     for (j=1;j<e.length;j++){
       e[j].draggable = false; // all others are not
     }
   }
   ev.preventDefault(); // ... whatever the default is?!?!?!
 }
-init();
+towersOfHanoi();
 
 
 
