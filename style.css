@@ -7,7 +7,11 @@
 	width: 760px;
 }
 
-
+.bar{
+  height: 500px;
+  width: 50px;
+  color: black;
+}
 
 .bar{
     width: 115px;
@@ -24,7 +28,7 @@
     cursor: pointer;
   }
 
-  .bar :before{
+  .bar::before {
       width: 4px;
       height: 116px;
       content: "";
@@ -35,7 +39,7 @@
       left: calc(50% - 2px);
       z-index: 10;
       border-radius: 30px;
-    }
+    } 
 
 #bar0{
 	position: absolute;
@@ -57,7 +61,8 @@
 	left: 600px;
 	height: 200px;
 	width: 30px;
-}
+} 
+
 .disc{
 	padding: 0;
 	margin: 0;
