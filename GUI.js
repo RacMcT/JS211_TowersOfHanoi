@@ -3,16 +3,16 @@
 const discs, bars, dragdone;
 
 function init(){
-  disks = document.getElementsByClassName("disc");
-  towers = document.getElementsByClassName("bar");
+  discs = document.getElementsByClassName("disc");
+  bars = document.getElementsByClassName("bar");
   for (var i = 0;i<discs.length;i++){
     discs[i].draggable = i==0;
     discs[i].addEventListener("dragstart",dragStart);
   }
-  for (var i = 0;i<towers.length;i++){
-    towers[i].addEventListener("dragover", dragOver);
-    towers[i].addEventListener("drop", drop);
-    towers[i].addEventListener("dragenter", dragEnter);
+  for (var i = 0;i<bars.length;i++){
+    bars[i].addEventListener("dragover", dragOver);
+    bars[i].addEventListener("drop", drop);
+    bars[i].addEventListener("dragenter", dragEnter);
   }
 }
 
@@ -25,17 +25,17 @@ function dragStart(ev) {
 
 function dragEnter (ev) {
   // get tower that has been entered by drag and get disk-ID
-  var tower = ev.currentTarget; 
-  var disc = dragDone;
+  let bar = ev.currentTarget; 
+  let disc = dragDone;
   // get disks that are already on tower
-  var discsOnTower = tower.getElementsByClassName("disk"); 
+  let discsOnTower = tower.getElementsByClassName("disk"); 
   if (discsOnTower.length==0 || discsOnTower[0].id>disc){
     // here if no disks yet on tower or the top disk is bigger than the dragged disk  
     tower.discCanBeDroppedHere = true; // we have to remember it for dragover
     ev.preventDefault(); // yes please!
     return;
   }
-  tower.discCanBeDroppedHere = false; // sorry no drop allowed here
+  bar.discCanBeDroppedHere = false; // sorry no drop allowed here
 }
 
 function dragOver(ev){
@@ -44,23 +44,24 @@ function dragOver(ev){
 }
   
 function drop(ev) {
-  // find disk and tower involved
-  var tower = ev.currentTarget;
-  var disc = document.getElementById(ev.dataTransfer.getData('text'));
+  // find disc and bar involved
+  let bar = ev.currentTarget;
+  let disc = document.getElementById(ev.dataTransfer.getData('text'));
   ev.dataTransfer.dropEffect = 'move';
-  // put disk on top of tower
-  tower.insertBefore(disc,tower.firstChild);
+  // put disc on top of bar
+  bar.insertBefore(disc,bar.firstChild);
   // re-adjust draggability
-  for (var i=0; i<towers.length;i++){ // for all towers
-    var e = towers[i].getElementsByClassName("disk"); // get disks
+  for (i=0; i<bars.length;i++){ // for all towers
+    e = bars[i].getElementsByClassName("disc"); // get discs
     if (e.length) e[0].draggable = true; // iop disk is draggable
-    for (var j=1;j<e.length;j++){
+    for (j=1;j<e.length;j++){
       e[j].draggable = false; // all others are not
     }
   }
-  ev.preventDefault(); // ... whatever the default is!!!
+  ev.preventDefault(); // ... whatever the default is?!?!?!
 }
 init();
+
 
 
 
