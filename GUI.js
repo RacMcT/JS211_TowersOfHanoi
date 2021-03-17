@@ -1,4 +1,6 @@
-// GUI Attempt for JS:
+// GUI Attempt for JS: 
+//BUG TO FIX: Am I overwriting myself here so that the discs won't stay or be able to really drop?!
+
 
  const disc, bar, dragdone;
 
@@ -17,10 +19,10 @@ function towersOfHanoi(){
 }
 
 function dragstart(ev) {
-  // write Diks-ID into dataTransfer Object
+  // write discs-ID into dataTransfer Object
   ev.dataTransfer.setData('text', ev.target.id);
-  // since dataTransfer is protected in dragEnter need to have a variable-- "ev like event"
-  dragDone = ev.target.id;
+  // since dataTransfer is protected in dragenter need to have a variable-- "ev like event"
+  dragdone = ev.target.id;
 }
 
 function dragenter (ev) {
@@ -40,7 +42,7 @@ function dragenter (ev) {
 
 function dragover(ev){
   if (ev.currentTarget.discCanBeDroppedHere)
-      ev.preventDefault();// if we may drop here ...
+      ev.preventDefault();// if we may drop here ...??
 }
   
 function drop(ev) {
@@ -51,14 +53,14 @@ function drop(ev) {
   // put disc on top of bar
   bar.insertBefore(disc,bar.firstChild);
   // re-adjust draggability
-  for (i=0; i<bar.length;i++){ // for all towers
+  for (i=0; i<bar.length;i++){ // for all bars
     e = bar[i].getElementsByClassName("disc"); // get discs
-    if (e.length) e[0].draggable = true; // top disk is draggable
+    if (e.length) e[0].draggable = true; // top disc is draggable
     for (j=1;j<e.length;j++){
       e[j].draggable = false; // all others are not
     }
   }
-  ev.preventDefault(); // ... whatever the default is?!?!?!
+  ev.preventDefault(); // ... whatever the default is?!?!?! **have to prevent a default, but not sure what it is...??
 }
 towersOfHanoi();
 
