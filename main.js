@@ -43,7 +43,8 @@ const printStacks = () => {
 // Next, what do you think this function should do?
 // This function should move discs from one stack to another stack -- onclick or drag for GUI?
   const movePiece = (start, destination) => {
-  return stacks[destination].push(stacks[start].pop())
+  let temp = stacks[start].pop()
+  return stacks[destination].push(temp)
 }
 
 // Before you move, should you check if the move it actually allowed? Should 3 be able to be stacked on 2

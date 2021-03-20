@@ -1,68 +1,105 @@
 // GUI Attempt for JS: 
-//BUG TO FIX: Am I overwriting myself here so that the discs won't stay or be able to really drop?!
 
+//BUG TO FIX: Need to write logic so discs don't got on same line area on the bar as another
 
- const disc, bar, dragdone;
+let bars = document.getElementsByClassName("bar");
 
-function towersOfHanoi(){
-  disc = document.getElementsByClassName("disc");
-  bar = document.getElementsByClassName("bar");
-  for (i = 0;i<disc.length;i++){
-    disc[i].draggable = i==0;
-    disc[i].addEventListener("dragstart",dragstart);
-  }
-  for (var i = 0;i<bars.length;i++){
-    bar[i].addEventListener("dragover", dragover);
-    bar[i].addEventListener("drop", drop);
-    bar[i].addEventListener("dragenter", dragenter);
-  }
+function allowDrop(ev) {
+  ev.preventDefault();
+  console.log("hello1");
 }
 
-function dragstart(ev) {
-  // write discs-ID into dataTransfer Object
-  ev.dataTransfer.setData('text', ev.target.id);
-  // since dataTransfer is protected in dragenter need to have a variable-- "ev like event"
-  dragdone = ev.target.id;
+function drag(ev) {
+  ev.dataTransfer.setData("text", ev.target.id);
+  console.log("hello2");
 }
 
-function dragenter (ev) {
-  // get bar/tower that has been entered by drag and get disk-ID
-  let bar = ev.currentTarget; 
-  let disc = dragdone;
-  // get disks that are already on tower
-  let discOnBar = bar.getElementsByClassName("disc"); 
-  if (discOnBar.length==0 || discOnBar[0].id>disc){
-    // here if no discs yet on bar/tower or the top disc is bigger than the dragged disc 
-    tower.discCanBeDroppedHere = true; // need to remember for dragOver?
-    ev.preventDefault(); // yes please!
-    return;
-  }
-  bar.discCanBeDroppedHere = false; // sorry no drop allowed here
-}
-
-function dragover(ev){
-  if (ev.currentTarget.discCanBeDroppedHere)
-      ev.preventDefault();// if we may drop here ...??
-}
-  
 function drop(ev) {
-  // find disc and bar involved
-  let bar = ev.currentTarget;
-  let disc = document.getElementById(ev.dataTransfer.getData('text'));
-  ev.dataTransfer.dropEffect = 'move';
-  // put disc on top of bar
-  bar.insertBefore(disc,bar.firstChild);
-  // re-adjust draggability
-  for (i=0; i<bar.length;i++){ // for all bars
-    e = bar[i].getElementsByClassName("disc"); // get discs
-    if (e.length) e[0].draggable = true; // top disc is draggable
-    for (j=1;j<e.length;j++){
-      e[j].draggable = false; // all others are not
-    }
+  ev.preventDefault();
+  var data = ev.dataTransfer.getData("text");
+  if (isLegal(ev)){
+    ev.target.appendChild(document.getElementById(data));
+  } else {
+    alert ("Illegal move, try again friend!")
   }
-  ev.preventDefault(); // ... whatever the default is?!?!?! **have to prevent a default, but not sure what it is...??
+  console.log("hello3");
 }
-towersOfHanoi();
+
+ const isLegal = (ev) => {
+let discNum = ev.target.id.slice(3);
+console.log(discNum);
+console.log(ev.path[0].children.length);
+  if (ev.path[0].children.length == 0){
+    return true
+} else if (ev.path[0].children.length > discNum){  
+     return true
+} else {return false}
+}
+
+
+//ORIGINAL CODE FOR GUI:
+
+//  const disc, bar, dragdone;
+
+// function towersOfHanoi(){
+//   disc = document.getElementsByClassName("disc");
+//   bar = document.getElementsByClassName("bar");
+//   for (i = 0;i<disc.length;i++){
+//     disc[i].draggable = i==0;
+//     disc[i].addEventListener("dragstart",dragstart);
+//   }
+//   for (var i = 0;i<bars.length;i++){
+//     bar[i].addEventListener("dragover", dragover);
+//     bar[i].addEventListener("drop", drop);
+//     bar[i].addEventListener("dragenter", dragenter);
+//   }
+// }
+
+// function dragstart(ev) {
+//   // write discs-ID into dataTransfer Object
+//   ev.dataTransfer.setData('text', ev.target.id);
+//   // since dataTransfer is protected in dragenter need to have a variable-- "ev like event"
+//   dragdone = ev.target.id;
+// }
+
+// function dragenter (ev) {
+//   // get bar/tower that has been entered by drag and get disk-ID
+//   let bar = ev.currentTarget; 
+//   let disc = dragdone;
+//   // get disks that are already on tower
+//   let discOnBar = bar.getElementsByClassName("disc"); 
+//   if (discOnBar.length==0 || discOnBar[0].id>disc){
+//     // here if no discs yet on bar/tower or the top disc is bigger than the dragged disc 
+//     tower.discCanBeDroppedHere = true; // need to remember for dragOver?
+//     ev.preventDefault(); // yes please!
+//     return;
+//   }
+//   bar.discCanBeDroppedHere = false; // sorry no drop allowed here
+// }
+
+// function dragover(ev){
+//   if (ev.currentTarget.discCanBeDroppedHere)
+//       ev.preventDefault();// if we may drop here ...??
+// }
+  
+// function drop(ev) {
+//   // find disc and bar involved
+//   let bar = ev.currentTarget;
+//   let disc = document.getElementById(ev.dataTransfer.getData('disc'));
+//   ev.dataTransfer.dropEffect = 'move';
+//   // put disc on top of bar
+//   bar.insertBefore(disc,bar.firstChild);
+//   // re-adjust draggability
+//   for (i=0; i<bar.length;i++){ // for all bars
+//     e = bar[i].getElementsByClassName("disc"); // get discs
+//     if (e.length) e[0].draggable = true; // top disc is draggable
+//     for (j=1;j<e.length;j++){
+//       e[j].draggable = false; // all others are not
+//     }
+//   }
+//   ev.preventDefault(); // ... whatever the default is?!?!?! **have to prevent a default, but not sure what it is...??
+// }
+// towersOfHanoi();
 
 
 

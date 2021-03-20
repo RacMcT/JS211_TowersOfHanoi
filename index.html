@@ -3,24 +3,29 @@
   <head>
     <meta charset="utf-8">
     <title></title>
-    <script src="GUI.js" defer></script>
+    <script src="GUI.js"></script>
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
     <h1>Towers Of Hanoi</h1>
     
     <div class="container">
-      <div class="bar" id="bar0"></div>
-      <div class="bar" id="bar1"></div>
-      <div class="bar" id="bar2"></div>
-      
-      <div class="disc" id="disc0" draggable=true></div> 
-      <div class="disc" id="disc1" draggable=true></div> 
-      <div class="disc" id="disc2" draggable=true></div> 
-      <div class="disc" id="disc3" draggable=true></div> 
-      <div class="disc" id="disc4" draggable=true></div> 
-    
-      <button onclick="towersOfHanoi()" >Play Game</button>
+      <div class="bar-container">
+        <div class="bar" id="bar0" ondrop="drop(event)" ondragover="allowDrop(event)">
+          <div class="disc" id="disc0" draggable=true ondragstart="drag(event)"></div> 
+          <div class="disc" id="disc1" draggable=true ondragstart="drag(event)"></div> 
+          <div class="disc" id="disc2" draggable=true ondragstart="drag(event)"></div> 
+          <div class="disc" id="disc3" draggable=true ondragstart="drag(event)"></div> 
+          <div class="disc" id="disc4" draggable=true ondragstart="drag(event)"></div> 
+        </div>
+        
+        
+        <div class="bar" id="bar1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div class="bar" id="bar2" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+
+    </div>
+
+      <!-- <button onclick="towersOfHanoi()" >Play Game</button> -->
       <div class="counter" id= "counter">
         <h2>Moves: </h2>
         <p id="move-count"></p>
