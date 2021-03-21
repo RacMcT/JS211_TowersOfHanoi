@@ -25,19 +25,22 @@ function drop(ev) {
   console.log("hello3");
 }
 
- const isLegal = (ev) => {
+const isLegal = (ev) => {
 let discNum = ev.target.id.slice(3);
 console.log(discNum);
 console.log(ev.path[0].children.length);
   if (ev.path[0].children.length == 0){
     return true
 } else if (ev.path[0].children.length > discNum){  
-     return true
-} else {return false}
+    return true
+} else {return false
+}
 }
 
 
-//ORIGINAL CODE FOR GUI:
+
+
+//ORIGINAL CODE FOR GUI- DID NOT WORK
 
 //  const disc, bar, dragdone;
 

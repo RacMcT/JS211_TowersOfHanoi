@@ -37,6 +37,8 @@
 	display: flex;
 	flex-direction: column;
 	z-index: 10;
+	
+
 	/* padding: 0;
 	margin: 0;
 	border: 1px solid gray;
@@ -67,7 +69,7 @@
 	z-index: 10;
 }
 #disc3{
-	background: #f7bd8f;
+	background: #91b7bb;
 	height: 50px;
 	width: 100px;
 	z-index: 10;
