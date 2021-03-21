@@ -1,14 +1,24 @@
-// GUI Attempt for JS: 
+// GUI Attempt for JS:
 
 //BUG TO FIX: Need to write logic so discs don't got on same line area on the bar as another
+//annotate functions to remember stuff later!!!!!! **called jsdoc (google more later)
 
 let bars = document.getElementsByClassName("bar");
 
+
+/**
+ * Starts drop event
+ * @param {DragEvent} ev drag and drop event 
+ */
 function allowDrop(ev) {
   ev.preventDefault();
   console.log("hello1");
 }
 
+/**
+ * Dragging event for disc selected
+ * @param {DragEvent} ev drag and drop event
+ */
 function drag(ev) {
   ev.dataTransfer.setData("text", ev.target.id);
   console.log("hello2");
@@ -18,38 +28,72 @@ function drag(ev) {
 //https://stackoverflow.com/questions/28203585/prevent-drop-inside-a-child-element-when-drag-dropping-with-js
 // added the "el" but it broke the drop - function didn't run
 
+/**
+ * Drop event
+ * @param {DragEvent} ev drag and drop event
+ */
 function drop(ev) {
   ev.preventDefault();
   let data = ev.dataTransfer.getData("text");
-  if (isLegal(ev)){
-    ev.target.appendChild(document.getElementById(data));
+  let source = document.getElementById(data);
+
+  if (isLegal(ev, source)) {
+    ev.target.appendChild(source);
   } else {
-    alert ("Illegal move, try again friend!")
+    alert("Illegal move, try again friend!");
   }
   console.log("hello3");
 }
 
-//DOESN'T COMPLETLY WORK- A SMALLER ONE CANNOT GO ONTO LARGER ONE??
+//DOESN'T COMPLETLY WORK- A SMALLER ONE CANNOT GO ONTO LARGER ONE ONCE MOVED 1ST TIME??
 
-const isLegal = (ev) => {
-let discNum = ev.target.id.slice(3);
-console.log(discNum);
-console.log(ev.path[0].children.length);
-  if (ev.path[0].children.length == 0){
-    return true
-} else if (ev.path[0].children.length > discNum){  
-    return true
-} else {return false
-}
-}
+//compare width of disc for one about to drop to the one it is about to go ontop of!!
+
+//select the last one appended or at the top of the tower for line 39
+
+//logic for game rules to put into isLegal()
+
+/**
+ * This checks if the attempted move is legal.
+ * @param {DragEvent} ev Drag and drop event.
+ * @param {HTMLElement} source `HTMLElement` being dragged.
+ * @returns A `boolean` as to whether or not the attempted move is legal.
+ */
+const isLegal = (ev, source) => {
+  if (ev.target.lastChild == null) {
+    return true;
+  }
+  let discTarget = ev.target.id;
+  let lastDiscTarget = ev.target.lastChild.id;
+  console.log(`discTarget: ${discTarget}`);
+  console.log(`lastDiscTarget: ${lastDiscTarget}`);
+
+  let pickupDisc = source.id;
+  console.log(`pickupDisc: ${pickupDisc}`);
+
+  // if (ev.path[0].children.length == 0) {
+  //   return true;
+  // }
+  // ev.path[0].children.forEach((child, index) => {
+  //   console.log(`child ${index}: ${child}`);
+  // });
+  //console.log(`pickupDisc: ${ev.path[0].lastChild.id}`);
+
+  return true;
+
+  // if (ev.path[0].children.length == 0) {
+  //   return true;
+  // } else if (ev.path[0].children.id > discTarget) {
+  //   return true;
+  // } else {
+  //   return false;
+  // }
+};
 
 //LOGIC RULES TO CODE:
 
 // Can ONLY take from the top of the pile? - Once I have the CSS figured out??
 // Need to stop the “collision” or divs going onto side but instead stack on each other
-
-
-
 
 //ORIGINAL CODE FOR GUI- DID NOT WORK
 
@@ -78,12 +122,12 @@ console.log(ev.path[0].children.length);
 
 // function dragenter (ev) {
 //   // get bar/tower that has been entered by drag and get disk-ID
-//   let bar = ev.currentTarget; 
+//   let bar = ev.currentTarget;
 //   let disc = dragdone;
 //   // get disks that are already on tower
-//   let discOnBar = bar.getElementsByClassName("disc"); 
+//   let discOnBar = bar.getElementsByClassName("disc");
 //   if (discOnBar.length==0 || discOnBar[0].id>disc){
-//     // here if no discs yet on bar/tower or the top disc is bigger than the dragged disc 
+//     // here if no discs yet on bar/tower or the top disc is bigger than the dragged disc
 //     tower.discCanBeDroppedHere = true; // need to remember for dragOver?
 //     ev.preventDefault(); // yes please!
 //     return;
@@ -95,7 +139,7 @@ console.log(ev.path[0].children.length);
 //   if (ev.currentTarget.discCanBeDroppedHere)
 //       ev.preventDefault();// if we may drop here ...??
 // }
-  
+
 // function drop(ev) {
 //   // find disc and bar involved
 //   let bar = ev.currentTarget;
@@ -115,16 +159,6 @@ console.log(ev.path[0].children.length);
 // }
 // towersOfHanoi();
 
-
-
-
-
-
-
-
-
-
-
 // // 'use strict';
 
 // // const assert = require('assert');
@@ -134,13 +168,13 @@ console.log(ev.path[0].children.length);
 // //   output: process.stdout
 // // });
 
-// // An object that represents the three stacks of Towers of Hanoi; 
-//   // * each key is an array of Numbers: 
-//     // * A is the far-left, 
-//     // * B is the middle, 
+// // An object that represents the three stacks of Towers of Hanoi;
+//   // * each key is an array of Numbers:
+//     // * A is the far-left,
+//     // * B is the middle,
 //     // * C is the far-right stack
-//       // * Each number represents the largest to smallest tokens: 
-//         // * 4 is the largest, 
+//       // * Each number represents the largest to smallest tokens:
+//         // * 4 is the largest,
 //         // * 1 is the smallest
 
 // let stacks = {
@@ -179,7 +213,7 @@ console.log(ev.path[0].children.length);
 //   }
 //   else if ([stacks[start]] < [stacks[destination]]){
 //     return true;
-//   } 
+//   }
 //   else {return false}
 // }
 
@@ -195,10 +229,10 @@ console.log(ev.path[0].children.length);
 
 // // When is this function called? What should it do with its argument?
 
-// //Takes in user input and then runs other functions in order. 
-// //If move is legal, then it will move the piece. Once it is moved it will check for a win. 
+// //Takes in user input and then runs other functions in order.
+// //If move is legal, then it will move the piece. Once it is moved it will check for a win.
 // //If the move is not legal it will tell you the move is invalid
-// //Added trim() and toLowerCase() to help with user input errors 
+// //Added trim() and toLowerCase() to help with user input errors
 
 // const towersOfHanoi = (start, destination) => {
 //   start= start.trim().toLowerCase();
@@ -267,7 +301,7 @@ console.log(ev.path[0].children.length);
 
 // //ORIGINAL CODE ATTEMPTS:
 
-// // // This code I wrote for playing the game in the console... 
+// // // This code I wrote for playing the game in the console...
 // // moveTower = (n, start, destination) => {
 // //   const temp;
 // //   if(start === a && destination === b || start === b && destination === a){
@@ -318,14 +352,13 @@ console.log(ev.path[0].children.length);
 
 // //Pseudo Code:
 // // if (disk ===1){ //"disk 1 is the disk number, 1 is smallest disk
-// // document.write("Move disk " + disk + " from post " + start + " to post " + 
+// // document.write("Move disk " + disk + " from post " + start + " to post " +
 // //       destination + ".<br/>";
 // //"start" represents starting post, which changes depending on which disk you are moving
-// // "destination" represents the destination post, which also changes depending on which disk you are moving 
+// // "destination" represents the destination post, which also changes depending on which disk you are moving
 // //   }
 
 // //n-1 disks
-
 
 // //UNIT TESTS:
 // // Only stacks onto empty rod or larger disk
