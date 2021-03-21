@@ -14,9 +14,13 @@ function drag(ev) {
   console.log("hello2");
 }
 
+// TRYING TO FIX OVERLAP DROP USING THIS JS CODE EXAMPLE: **isLegal() overriding it
+//https://stackoverflow.com/questions/28203585/prevent-drop-inside-a-child-element-when-drag-dropping-with-js
+// added the "el" but it broke the drop - function didn't run
+
 function drop(ev) {
   ev.preventDefault();
-  var data = ev.dataTransfer.getData("text");
+  let data = ev.dataTransfer.getData("text");
   if (isLegal(ev)){
     ev.target.appendChild(document.getElementById(data));
   } else {
@@ -24,6 +28,8 @@ function drop(ev) {
   }
   console.log("hello3");
 }
+
+//DOESN'T COMPLETLY WORK- A SMALLER ONE CANNOT GO ONTO LARGER ONE??
 
 const isLegal = (ev) => {
 let discNum = ev.target.id.slice(3);
