@@ -37,6 +37,11 @@ console.log(ev.path[0].children.length);
 }
 }
 
+//LOGIC RULES TO CODE:
+
+// Can ONLY take from the top of the pile? - Once I have the CSS figured out??
+// Need to stop the “collision” or divs going onto side but instead stack on each other
+
 
 
 
