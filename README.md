@@ -1,3 +1,35 @@
+# RACHEL'S CODE PLAN:
+
+* Towers of Hanoi Terminal Game:
+* Goal: Move all discs from the starting stack/pyramid/tower to another one- creating an identical ending stack in a different location
+* Rules/Playing the Game: 
+* Players move smallest (and top) disc on a stack to another designated area
+* Players can only move thier disc onto an empty area or onto a larger disc
+* Players can only move discs onto 3 disignated areas (discs are all stacked in one area in pyramid tower at the beginning of the game)
+* Players are allowed to move their disc back to a former area/tower, so long as it is on a larger disc (you can backtrack if you've gotten stuck)
+
+# Pseudo Code:
+
+* Game Set-Up:
+Start with 3 towers/stacks of discs in pyramid shape (largest to smallest)
+Have 2 empty drop/move to areas
+
+* Players need to enter the disc they want to move (starting location) and enter a destination (where to put it)
+* Game needs to verify that they have chosen starting disc and destination that are within the rules
+* Player needs to be informed if thier choices are invalid
+* If player choses starting disc and destiation that are legal, then the disc needs to be moved from its starting locaiton to its destination
+* The data needs to transfer from one stack/tower to another
+* This data needs to be able to change each time a user enters a legal combination of starting and ending destinations
+* Game needs to keep track after each move to see if the user has won the game! 
+* Basically, at the end of the data transfer of a disc from one location to the other, we need to check to see if the destination has all the discs on it 
+* If the player wins, they need to be notified and the game ends
+* If there is time, also make a move counter, so they player can see how many times they have moved discs
+
+
+
+
+
+
 
 
 # JS211_Towers of Hanoi[![CircleCI](https://circleci.com/gh/AustinCodingAcademy/javascript-workbook/tree/gh-pages.svg?style=svg)](https://circleci.com/gh/AustinCodingAcademy/javascript-workbook/tree/gh-pages)
@@ -23,10 +55,10 @@ Your checkpoint is really a terminal app; which is what you'll be graded on. How
 1. 20pts - **Illegal Moves** - Prevents larger blocks from stacking on smaller blocks
 1. 20pts - **Notifies winner** - When all the blocks are stacked into column 2 or 1 the user is alerted they won!
 1. 20pts - **Minimum 3 Unit Tests** - Should be attached to your file the same way Tic, Tac, Toe, PigLatin or Rock Paper Scissors is done.
-1. 10pts - **Graphical User Interface** - Take this game out of the terminal by adding a User Interface that uses `towersOfHanoi()` function in `index.js`.
-
+1. 10pts - **Graphical User Interface** - Take this game out of the terminal by adding a User Interface that uses `towersOfHanoi()` function in `index.js`. ISAIAH SAID THIS IS A BONUS/PUSH YOURSELF!!
+ 
 * **Extended Practice Bonus!!**
-  * Keeps count of moves as player plays games
+  * Keeps count of moves as player plays games - WORKS FOR TERMINAL GAME
   * Sound Effects
   * Peaceful Background
   * Vertical columns
