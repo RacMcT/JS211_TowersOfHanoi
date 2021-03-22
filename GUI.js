@@ -49,9 +49,7 @@ function drop(ev) {
 
 //compare width of disc for one about to drop to the one it is about to go ontop of!!
 
-//select the last one appended or at the top of the tower for line 39
-
-//logic for game rules to put into isLegal()
+//logic for game rules to put into isLegal()??
 
 /**
  * This checks if the attempted move is legal.
@@ -65,34 +63,27 @@ const isLegal = (ev, source) => {
   }
   let discTarget = ev.target.id;
   let lastDiscTarget = ev.target.lastChild.id;
+  let pickupDisc = source.id;
+
   console.log(`discTarget: ${discTarget}`);
   console.log(`lastDiscTarget: ${lastDiscTarget}`);
-
-  let pickupDisc = source.id;
   console.log(`pickupDisc: ${pickupDisc}`);
 
-  // if (ev.path[0].children.length == 0) {
-  //   return true;
-  // }
-  // ev.path[0].children.forEach((child, index) => {
-  //   console.log(`child ${index}: ${child}`);
-  // });
-  //console.log(`pickupDisc: ${ev.path[0].lastChild.id}`);
-
-  return true;
-
-  // if (ev.path[0].children.length == 0) {
-  //   return true;
-  // } else if (ev.path[0].children.id > discTarget) {
-  //   return true;
-  // } else {
-  //   return false;
-  // }
+  if (lastDiscTarget > pickupDisc) {
+    return true;
+  } else {
+    return false;
+  }
 };
+
+
+
+
+
 
 //LOGIC RULES TO CODE:
 
-// Can ONLY take from the top of the pile? - Once I have the CSS figured out??
+// Can ONLY take from the top of the pile? - last child? 
 // Need to stop the “collision” or divs going onto side but instead stack on each other
 
 //ORIGINAL CODE FOR GUI- DID NOT WORK
